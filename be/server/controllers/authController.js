@@ -40,8 +40,3 @@ exports.login = async (req, res) => {
         return res.status(statusCode).json({ message });
     }
 };
-
-//{
-//     "email":"votemap.nasional@mail.com",
-//     "password":"123"
-// }

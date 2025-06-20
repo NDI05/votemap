@@ -29,8 +29,14 @@ exports.readAllTps = async (req, res) => {
         } = req.query;
         const query = 'CALL sp_tps_read(?, ?, ?, ?, ?, ?, ?, ?)';
         const [rows] = await db.execute(query, [
-            actorIdUser, name || null, idSubDistrict || null, idDistrict || null,
-            idCity || null, idProvince || null, parseInt(limit), parseInt(offset)
+            actorIdUser, 
+            name || null, 
+            idSubDistrict || null, 
+            idDistrict || null,
+            idCity || null, 
+            idProvince || null, 
+            parseInt(limit), 
+            parseInt(offset)
         ]);
         res.status(200).json(rows[0]);
     } catch (error) {
@@ -68,4 +74,3 @@ exports.deleteTps = async (req, res) => {
         return res.status(statusCode).json({ message });
     }
 };
-

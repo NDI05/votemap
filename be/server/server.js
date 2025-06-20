@@ -1,26 +1,35 @@
 require('dotenv').config();
-const express = require('express')
+
+const express = require('express');
+const cors = require('cors');
+const application = require('./route/index');
+
 const app = express();
-const application = require ('./routes/index');
-const cors = require('cors')
+const port = process.env.PORT || 3000;
 
-const port = process.env.PORT;
+const allowedOrigins = [process.env.URL_FE];
 
-app.use(cors({
-    origin: '*',
-    methods: ['GET','POST','PUT','DELETE'],
-    allowedHeaders: ['Content-Type','Authorization']
-}));
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    
+};
 
-app.use(express.urlencoded({extended : true}))
+app.use(cors(corsOptions));
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use('/',application);
-
-const path = require('path')
-
-
+app.use('/', application);
 
 app.listen(port, () => {
-    console.log(`server listening on port ${port}`)
-})
+    console.log(`Server is running on http://localhost:${port}`);
+});
