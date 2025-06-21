@@ -37,6 +37,7 @@ exports.login = async (req, res) => {
         });
     } catch (error) {
         const { statusCode, message } = handleDbError(error);
+        console.log(error.message || handleDbError(error))
         return res.status(statusCode).json({ message });
     }
 };

@@ -24,17 +24,12 @@ exports.readAllTps = async (req, res) => {
     try {
         const actorIdUser = req.user.idUser;
         const { 
-            name, idSubDistrict, idDistrict, idCity, idProvince, 
-            limit = 100, offset = 0 
+            searchQuery, limit = 100, offset = 0 
         } = req.query;
-        const query = 'CALL sp_tps_read(?, ?, ?, ?, ?, ?, ?, ?)';
+        const query = 'CALL sp_tps_read(?, ?, ?, ?)';
         const [rows] = await db.execute(query, [
             actorIdUser, 
-            name || null, 
-            idSubDistrict || null, 
-            idDistrict || null,
-            idCity || null, 
-            idProvince || null, 
+            searchQuery || null,
             parseInt(limit), 
             parseInt(offset)
         ]);

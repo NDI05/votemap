@@ -8,6 +8,8 @@ const electionRoute = require('./electionRoute');
 const reportRoute = require('./reportRoute');
 const publicRoute = require('./publicRoute');
 const dashboardRoute = require('./dashboardRoute');
+const recapRoute = require('./recapRoute');
+const getRegion = require('./getRegionRoute');
 
 router.use('/admin', adminRoute);
 router.use('/auth', authRoutes);
@@ -18,6 +20,8 @@ router.use('/election', electionRoute);
 router.use('/report', reportRoute);
 router.use('/public', publicRoute);
 router.use('/dashboard', dashboardRoute);
+router.use('/recap', recapRoute);
+router.use('/getregion', getRegion);
 
 
 module.exports = router;
